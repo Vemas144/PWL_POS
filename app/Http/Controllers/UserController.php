@@ -28,7 +28,9 @@ class UserController extends Controller
         // $users = UserModel::findOr(20, ['username', 'nama'], function(){
         //     abort(404); 
         // }); 
-        $users = UserModel::where('username', 'manager9')->findOrFail(1);
+        //$users = UserModel::where('username', 'manager9')->findOrFail(1);
+        $users = UserModel::where('level_id', 2)->count();
+        ($users);
         return view('user', ['data' => $users]);
     }
 }
