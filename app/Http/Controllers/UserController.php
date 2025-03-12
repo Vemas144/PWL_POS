@@ -13,6 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = UserModel::with('level')->get();
+        //dd($users);
         return view('user', ['data' => $users]);
 
         //tambah data user dengan Elequent Model
@@ -93,7 +94,7 @@ class UserController extends Controller
         //     dd($users->wasChanged(['nama', 'username'])); // true
 
         //$users = UserModel::all();
-        return view('user', ['data' => $users]);
+        //return view('user', ['data' => $users]);
     }
 
     public function tambah()
