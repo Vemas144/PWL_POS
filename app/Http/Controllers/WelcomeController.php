@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
@@ -14,7 +14,6 @@ class WelcomeController extends Controller
         ];
 
         $activeMenu = 'dashboard';
-
         return view('welcome', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 }
