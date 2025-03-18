@@ -17,7 +17,7 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/user/' . $user->user_id . '/update_ajax') }}" method="POST" id="formedit">
+    <form action="{{ url('/user/' . $user->user_id . '/update_ajax') }}" method="POST" id="form-edit">
         @csrf
         @method('PUT')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
@@ -69,7 +69,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#formedit").validate({
+            $("#form-edit").validate({
                 rules: {
                     level_id: { required: true, number: true },
                     username: { required: true, minlength: 3, maxlength: 20 },
