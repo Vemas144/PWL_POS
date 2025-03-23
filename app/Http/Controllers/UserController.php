@@ -50,9 +50,9 @@ class UserController extends Controller
                             method_field('DELETE').
                             '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button>'.
                         '</form>';*/
-                        $btn = '<a href="'.url('/user/'.$user->user_id).'" class="btn btn-info btn-sm">Detail</a>';
-                        // $btn = '<button onclick="modalAction(\''.url('/user/' . $user->user_id .
-                        // '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
+                       //$btn = '<a href="'.url('/user/'.$user->user_id).'" class="btn btn-info btn-sm">Detail</a>';
+                        $btn = '<button onclick="modalAction(\''.url('/user/' . $user->user_id .
+                         '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
                         $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id .
                         '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
                         $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id .
@@ -218,7 +218,7 @@ class UserController extends Controller
         }  
         redirect('/');
     }
-
+    
     public function edit_ajax(string $id){
         $user = UserModel::find($id);
         $level = LevelModel::select('level_id', 'level_nama')->get();
@@ -287,5 +287,11 @@ class UserController extends Controller
         }
     }
     return redirect("/");
+    }
+
+    public function show_ajax($id){
+        $user = UserModel::find($id);
+        $level = LevelModel::find($user->level_id);
+        return view('user.show_ajax', ['user' => $user, 'level' => $level]);
     }
 }

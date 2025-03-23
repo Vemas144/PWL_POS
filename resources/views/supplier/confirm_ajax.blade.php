@@ -1,4 +1,4 @@
-@empty($user)
+@empty($supplier)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,18 +10,18 @@ label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="alert alert-danger">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                      Data yang anda cari tidak ditemukan</div>
-                <a href="{{ url('/user') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/supplier') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/user/' . $user->user_id.'/delete_ajax') }}" method="POST" id="form-delete">
+    <form action="{{ url('/supplier/' . $supplier->supplier_id.'/delete_ajax') }}" method="POST" id="form-delete">
     @csrf
     @method('DELETE')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-
 label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
@@ -31,12 +31,14 @@ label="Close"><span aria-hidden="true">&times;</span></button>
                     Apakah Anda ingin menghapus data seperti di bawah ini?
                 </div>
                 <table class="table table-sm table-bordered table-striped">
-                    <tr><th class="text-right col-3">Level Pengguna :</th><td class="col-9">{{
-$user->level->level_nama }}</td></tr>
-                    <tr><th class="text-right col-3">Username :</th><td class="col-9">{{
-$user->username }}</td></tr>
-                    <tr><th class="text-right col-3">Nama :</th><td class="col-9">{{ 
-$user->nama }}</td></tr>
+                    <tr><th class="text-right col-3">Nama :</th><td class="col-9">{{
+$supplier->supplier_nama }}</td></tr>
+                    <tr><th class="text-right col-3">Alamat :</th><td class="col-9">{{ 
+$supplier->supplier_alamat }}</td></tr>
+                    <tr><th class="text-right col-3">Telepon :</th><td class="col-9">{{ 
+$supplier->supplier_telepon }}</td></tr>
+                    <tr><th class="text-right col-3">Email :</th><td class="col-9">{{ 
+$supplier->supplier_email }}</td></tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -64,7 +66,7 @@ $user->nama }}</td></tr>
                                     text: response.message
                                 });
                                    // Refresh the DataTable
-                                   $('#table_user').DataTable().ajax.reload(); // Ensure this matches your DataTable initialization   
+                                   $('#table_supplier').DataTable().ajax.reload(); // Ensure this matches your DataTable initialization  
                             }else{
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

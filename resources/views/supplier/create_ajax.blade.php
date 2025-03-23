@@ -1,55 +1,52 @@
-<form action="{{ url('/user/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/supplier/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Supplier</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
     aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label>Level Pengguna</label>
-                <select name="level_id" id="level_id" class="form-control" required>
-                    <option value="">- Pilih Level -</option>
-                    @foreach($level as $l)
-                        <option value="{{ $l->level_id }}">{{ $l->level_nama }}</option>
-                    @endforeach
-                </select>
-                <small id="error-level_id" class="error-text form-text text-danger"></small>
-            </div>
-            <div class="form-group">
-                <label>Username</label>
-                <input value="" type="text" name="username" id="username" class="form-control"
-required>
-                <small id="error-username" class="error-text form-text text-danger"></small>
-            </div>
-            <div class="form-group">
                 <label>Nama</label>
-                <input value="" type="text" name="nama" id="nama" class="form-control"
+                <input value="" type="text" name="supplier_nama" id="supplier_nama" class="form-control"
 required>
-                <small id="error-nama" class="error-text form-text text-danger"></small>
+                <small id="error-supplier_nama" class="error-text form-text text-danger"></small>
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input value="" type="password" name="password" id="password" class="form-control" required>
-                <small id="error-password" class="error-text form-text text-danger"></small>
+                <label>Alamat</label>
+                <input value="" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control"
+required>
+                <small id="error-supplier_alamat" class="error-text form-text text-danger"></small>
             </div>
+            <div class="form-group">
+                <label>Telepon</label>
+                <input value="" type="text" name="supplier_telepon" id="supplier_telepon" class="form-control"
+required>
+                <small id="error-supplier_telepon" class="error-text form-text text-danger"></small>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input value="" type="text" name="supplier_email" id="supplier_email" class="form-control"
+ required>
+                <small id="error-supplier_email" class="error-text form-text text-danger"></small>
+            </div>
+        </div>
             <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
     </div>
-</div>
 </form>
 <script>
         $(document).ready(function() {
             $("#form-tambah").validate({
             rules: {
-                level_id: {required: true, number: true},
-                username: {required: true, minlength: 3, maxlength: 20},
-                nama: {required: true, minlength: 3, maxlength: 100},
-                password: {required: true, minlength: 6, maxlength: 20}
+                supplier_nama: { required: true, minlength: 3, maxlength: 100 },
+                supplier_alamat: { required: true, minlength: 3, maxlength: 100 },
+                supplier_telepon: { required: true, minlength: 3, maxlength: 15 },
+                supplier_email: { required: true, minlength: 3, maxlength: 20 }
             },
             submitHandler: function(form) {
             $.ajax({
@@ -64,8 +61,8 @@ required>
                             title: 'Berhasil',
                             text: response.message
                         });
-                            // Refresh the DataTable
-                            $('#table_user').DataTable().ajax.reload(); // Ensure this matches your DataTable initialization
+                           // Refresh the DataTable
+                           $('#table_supplier').DataTable().ajax.reload(); // Ensure this matches your DataTable initialization
                     }else{
                         $('.error-text').text('');
                         $.each(response.msgField, function(prefix, val) {
