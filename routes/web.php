@@ -8,6 +8,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Auth\Middleware\Authorize;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,8 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
     });
 
-    Route::group(['prefix' => 'level'], function(){
+    Route::middleware(['authorize:ADM'])->group (function (){
+        Route::group(['prefix' => 'level'], function(){
         Route::get('/', [LevelController::class, 'index']);
         Route::post('/list', [LevelController::class, 'list'])->name('level.list');
         Route::get('/create', [LevelController::class, 'create']);
@@ -68,6 +70,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
         Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
         Route::delete('/{id}', [LevelController::class, 'destroy']);
+        });
     });
 
     Route::group(['prefix' => 'kategori'], function(){
