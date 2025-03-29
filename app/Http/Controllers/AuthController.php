@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\UserModel; 
+use App\Models\LevelModel;
+
 
 class AuthController extends Controller
 {
@@ -34,6 +38,38 @@ class AuthController extends Controller
         return redirect('login');
     }
 
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+
+    public function postRegister(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'username' => 'required|string|unique:m_user,username|min:4|max:20',
+            'password' => 'required|string|min:6|max:20|confirmed',
+            'nama' => 'required|string|max:100',
+        ]);
+
+        $customerLevel = LevelModel::where('level_nama', 'Customer')->first();
+        $user = UserModel::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'nama' => $request->nama,
+            'level_id' => $customerLevel->level_id,
+        ]);
+
+        Auth::login($user);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Registration successful!',
+            'redirect' => url('/'),
+        ]);;
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -41,4 +77,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('login');
     }
+
 }
