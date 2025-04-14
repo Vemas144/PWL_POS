@@ -131,5 +131,33 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <!-- User Profile Dropdown -->
+    <li class="nav-item dropdown user-menu">
+      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+        <img src="{{ Auth::user()->foto ? asset('storage/foto/' . Auth::user()->foto) : asset('adminlte/dist/img/user4-128x128.jpg') }}"
+            class="user-image" alt="User Image"
+            style="object-fit: cover; width: 25px; height: 25px;">
+      </a>
+      <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        
+        <!-- User Info Header -->
+        <li class="dropdown-item d-flex align-items-center">
+          <img src="{{ Auth::user()->foto ? asset('storage/foto/' . Auth::user()->foto) : asset('adminlte/dist/img/user4-128x128.jpg') }}"
+              class="img-circle mr-2" alt="User Image"
+              style="object-fit: cover; width: 50px; height: 50px;">
+          <span class="font-weight-bold">{{ Auth::user()->nama }}</span>
+        </li>
+
+        <li class="dropdown-divider"></li>
+
+        <!-- Lihat Profil -->
+        <li>
+          <a href="{{ url('/profile') }}" class="dropdown-item">
+            <i class="fas fa-user mr-2"></i> Lihat Profil
+          </a>
+        </li>
+      </ul>
+    </li>
     </ul>
   </nav>
+  

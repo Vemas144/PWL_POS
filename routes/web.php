@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Auth\Middleware\Authorize;
 use Monolog\Level;
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
     });
 
     Route::get('/', [WelcomeController::class, 'index']);
+    
 
     Route::middleware(['authorize:ADM'])->group (function (){
         Route::group(['prefix' => 'user'], function(){
@@ -58,6 +60,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
             Route::get('/export_excel', [UserController::class, 'export_excel']);
             Route::get('/export_pdf', [UserController::class, 'export_pdf']);
             Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
+            Route::get('/profile', [UserController::class, 'profile']);
             Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
         });
 
@@ -149,6 +152,11 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
             Route::get('/export_pdf', [BarangController::class, 'export_pdf']);
             Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
             Route::delete('/{id}', [BarangController::class, 'destroy']);
+        });
+
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/', [ProfileController::class, 'index']);
+            Route::post('/update_photo', [ProfileController::class, 'update_photo']);
         });
     });   
 });
