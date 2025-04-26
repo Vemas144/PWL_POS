@@ -102,7 +102,7 @@
                                     $('#error-' + prefix).text(val[0]);
                                 });
                                 Swal.fire({
-                                    icon: 'error',
+                                    icon: 'error', 
                                     title: 'Terjadi Kesalahan',
                                     text: response.message
                                 });
